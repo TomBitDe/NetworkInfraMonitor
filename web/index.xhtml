@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Network Infrastructure Monitor</title>
+    </h:head>
+    <body>
+        <h:form id="dataTableForm">
+            <p:growl id="growl" showDetail="true" sticky="false" life="2500"/>
+
+            <h2>Enter a monitoring interval</h2>
+
+            <p:panelGrid class="ui-noborder">
+                <f:facet name="header">  
+                    <p:row>  
+                        <p:column style="font-weight: bold;">Start<br/>IP</p:column>  
+                        <p:column style="font-weight: bold;">End<br/>IP</p:column>  
+                        <p:column style="font-weight: bold;">Interval<br/>[sec]</p:column>  
+                        <p:column style="font-weight: bold;">Range<br/>comment</p:column>  
+                    </p:row>  
+                </f:facet>
+                <p:row>  
+                    <p:column>  
+                        <p:inputText id="startIp" size="13" value="#{MonitorConfigurationBean.startIp}"/>
+                    </p:column>  
+                    <p:column>  
+                        <p:inputText id="endIp" size="13" value="#{MonitorConfigurationBean.endIp}"/>
+                    </p:column>  
+                    <p:column>  
+                        <p:inputText id="interval" size="3" value="#{MonitorConfigurationBean.interval}" maxlength="3"/>
+                    </p:column>  
+                    <p:column>  
+                        <p:inputText id="comment" size="20" value="#{MonitorConfigurationBean.comment}" maxlength="40"/>
+                    </p:column>  
+                </p:row>
+
+            </p:panelGrid>
+            <br></br>
+            <p:commandButton id="add" icon="ui-icon-plus" value="Add" action="#{MonitorConfigurationBean.addMonitor}"
+                             disabled="#{MonitorConfigurationBean.addDisabled}" 
+                             ajax="true" update="dataTableForm"/>
+            <br></br>
+            <br></br>
+            <!--
+            -->
+            <p:outputPanel id="outputArea">
+                <p:dataTable id="checkboxDT" var="monitor" value="#{MonitorConfigurationBean.configuredMonitors}" 
+                             selection="#{MonitorConfigurationBean.selectedMonitors}" 
+                             rowKey="#{monitor.startIp}" 
+                             style="margin-bottom:0"
+                             tableStyle="width:auto" 
+                             resizableColumns="true">
+                    <f:facet name="header">
+                        Monitors
+                    </f:facet>
+                    <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+                    <p:column headerText="Start IP" style="width:20%;">
+                        <h:outputText value="#{monitor.startIp}" />
+                    </p:column>
+                    <p:column headerText="End IP" style="width:20%;">
+                        <h:outputText value="#{monitor.endIp}" />
+                    </p:column>
+                    <p:column headerText="Interval" style="width:10%;">
+                        <h:outputText value="#{monitor.interval}" />
+                    </p:column>
+                    <p:column headerText="Range comment" style="width:50%;">
+                        <h:outputText value="#{monitor.comment}" />
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton process="checkboxDT" icon="ui-icon-trash" value="Delete"
+                                         disabled="#{MonitorConfigurationBean.deleteDisabled}"
+                                         action="#{MonitorConfigurationBean.deleteSelection}"
+                                         ajax="true" update="checkboxDT" />
+                    </f:facet>
+                </p:dataTable>
+                <br></br>
+                <p:outputPanel id="controls" > 
+                    <p:commandButton id="start" value="Start" disabled="#{MonitorConfigurationBean.startDisabled}"
+                                     icon="ui-icon-play" action="#{MonitorConfigurationBean.startMonitors}"
+                                     ajax="true" update="dataTableForm" />
+                    <p:commandButton id="stop" value="Stop" disabled="#{MonitorConfigurationBean.stopDisabled}"
+                                     icon="ui-icon-stop" action="#{MonitorConfigurationBean.stopMonitors}"
+                                     ajax="true" update="dataTableForm" />
+                    <p:commandButton id="results" value="Results" disabled="#{MonitorConfigurationBean.resultsDisabled}"
+                                     ajax="true" update="dataTableForm"
+                                     icon="ui-icon-newwin" action="go_results" />
+                </p:outputPanel>
+            </p:outputPanel>
+            <p:poll interval="3" update="outputArea" />
+        </h:form>
+    </body>
+</html>

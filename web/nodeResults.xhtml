@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Monitoring results</title>
+        <script name="jquery/jquery.js" library="primefaces"></script>
+    </h:head>
+    <body>
+        <h:form id="nodeResultsForm">
+            <p:growl id="growl" showDetail="true" sticky="false" life="2500"/>
+
+            <p:commandButton id="tophome" value="Home"
+                             icon="ui-icon-home" action="go_config" />
+            <br></br>
+            <br></br>
+
+            <p:treeTable  id="treeResult" value="#{NodeResultsBean.root}" var="document">
+                <p:ajax event="expand" listener="#{NodeResultsBean.nodeExpand}" />
+                <p:ajax event="collapse" listener="#{NodeResultsBean.nodeCollapse}" />
+                <f:facet name="header">
+                    Monitor viewer
+                </f:facet>
+                <p:column>
+                    <f:facet name="header">
+                        Monitor
+                    </f:facet>
+                    <h:outputText value="#{document.monitorId}">
+                    </h:outputText>
+                </p:column>
+                <p:column style="width:10px; text-align: center">
+                    <f:facet name="header">
+                        Summary
+                    </f:facet>
+                    <h:graphicImage rendered="#{document.summary eq 1}" value="/images/yes-32x32.png" />
+                    <h:graphicImage rendered="#{document.summary eq 0}" value="/images/no-32x32.png" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        Interval
+                    </f:facet>
+                    <h:outputText value="#{document.interval}">
+                    </h:outputText>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        Destination
+                    </f:facet>
+                    <h:outputText value="#{document.inetAddr}">
+                        <f:converter converterId="InetAddressConverter"/>
+                    </h:outputText>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        Last probe
+                    </f:facet>
+                    <h:outputText value="#{document.lastProbe}">
+                        <f:attribute name="pattern" value="dd.MM.yyyy HH:mm:ss" />
+                        <f:attribute name="timeZone" value="Europe/Berlin" />
+                        <f:attribute name="locale" value="de" />
+                        <f:converter converterId="LocalDateTimeConverter"/>
+                    </h:outputText>
+                </p:column>
+                <p:column style="width:10px; text-align: center">
+                    <f:facet name="header">
+                        Result
+                    </f:facet>
+                    <h:graphicImage rendered="#{document.probeResult eq 1}" value="/images/yes-32x32.png" />
+                    <h:graphicImage rendered="#{document.probeResult eq 0}" value="/images/no-32x32.png" />
+                </p:column>
+                <p:column style="width:10px; text-align: center">
+                    <f:facet name="header">
+                        Quality
+                    </f:facet>
+                    <h:graphicImage rendered="#{document.quality ge 0 and document.quality lt 4}" value="/images/thumbs-down.png" />
+                    <h:graphicImage rendered="#{document.quality ge 4 and document.quality le 6}" value="/images/thumbs-up-down.png" />
+                    <h:graphicImage rendered="#{document.quality gt 6}" value="/images/thumbs-up.png" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        Probe
+                    </f:facet>
+                    <h:outputText value="#{document.probe}">
+                        <f:converter converterId="ProbeConverter"/>
+                    </h:outputText>
+                </p:column>
+            </p:treeTable>
+
+            <p:poll interval="3" update="treeResult" listener="#{NodeResultsBean.update}" />
+            <br></br>
+            <p:commandButton id="bottomhome" value="Home"
+                             icon="ui-icon-home" action="go_config" />
+        </h:form>
+    </body>
+</html>

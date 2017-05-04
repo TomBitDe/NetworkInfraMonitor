@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+    <application id="NetworkInfraMonitor">
+        <locale-config>
+            <default-locale>en_GB</default-locale>
+        </locale-config>
+        <resource-bundle>
+            <base-name>ressources.label</base-name>
+            <var>lab</var>
+        </resource-bundle>
+    </application>
+    <navigation-rule>
+        <description>Fuer alle Seiten</description>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>go_config</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>go_results</from-outcome>
+            <to-view-id>/nodeResults.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <description>Configuration Page</description>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>go_results</from-outcome>
+            <to-view-id>/nodeResults.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <description>Results Page</description>
+        <from-view-id>/nodeResults.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>go_config</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+</faces-config>

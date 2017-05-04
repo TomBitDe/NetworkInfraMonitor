@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Monitoring results</title>
+    </h:head>
+    <body>
+        <h:form id="resultsTableForm">
+            <p:growl id="growl" showDetail="true" sticky="false" life="2500"/>
+
+            <p:commandButton id="tophome" value="Home"
+                             icon="ui-icon-home" action="go_config" />
+            <br></br>
+            <br></br>
+            <p:dataTable id="destinations" var="destination" value="#{TableResultsBean.destinations}"
+                         tableStyle="width:auto" resizableColumns="true">
+                <p:column headerText="IP" style="width:10px;">
+                    <h:outputText value="#{destination.inetAddr}" >
+                        <f:converter converterId="InetAddressConverter"/>
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="Interval" style="width:10px; text-align: right">
+                    <h:outputText value="#{destination.interval}" />
+                </p:column>
+
+                <p:column headerText="Last probe" style="width:10px;">
+                    <h:outputText value="#{destination.lastProbe}">
+                        <f:attribute name="pattern" value="dd.MM.yyyy HH:mm:ss" />
+                        <f:attribute name="timeZone" value="Europe/Berlin" />
+                        <f:attribute name="locale" value="de" />
+                        <f:converter converterId="LocalDateTimeConverter"/>
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="Result" style="width:10px; text-align: center">
+                    <h:graphicImage rendered="#{destination.probeResult eq true}" value="/images/yes-32x32.png" />
+                    <h:graphicImage rendered="#{destination.probeResult eq false}" value="/images/no-32x32.png" />
+                </p:column>
+
+                <p:column headerText="Quality" style="width:10px; text-align: center">
+                    <h:graphicImage rendered="#{destination.quality lt 4}" value="/images/thumbs-down.png" />
+                    <h:graphicImage rendered="#{destination.quality ge 4 and destination.quality le 6}" value="/images/thumbs-up-down.png" />
+                    <h:graphicImage rendered="#{destination.quality gt 6}" value="/images/thumbs-up.png" />
+                </p:column>
+
+                <p:column headerText="Probe" style="width:10px;">
+                    <h:outputText value="#{destination.probe}">
+                         <f:converter converterId="ProbeConverter"/>
+                    </h:outputText>
+                </p:column>
+            </p:dataTable>
+            <p:poll interval="3" update="destinations" listener="#{TableResultsBean.getDestinations}"/>
+            <br></br>
+            <p:commandButton id="bottomhome" value="Home"
+                             icon="ui-icon-home" action="go_config"
+                             ajax="true"/>
+        </h:form>
+    </body>
+</html>
