@@ -81,6 +81,9 @@
                 </p:dataTable>
                 <br></br>
                 <p:outputPanel id="controls" > 
+                    <p:commandButton id="load" value="Load" disabled="#{MonitorConfigurationBean.loadDisabled}"
+                                     icon="ui-icon-refresh" action="#{MonitorConfigurationBean.loadConfiguration}"
+                                     ajax="true" update="dataTableForm" />
                     <p:commandButton id="start" value="Start" disabled="#{MonitorConfigurationBean.startDisabled}"
                                      icon="ui-icon-play" action="#{MonitorConfigurationBean.startMonitors}"
                                      ajax="true" update="dataTableForm" />

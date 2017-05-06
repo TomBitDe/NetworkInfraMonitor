@@ -1,12 +1,20 @@
 package config;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
+import java.util.Set;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
@@ -24,6 +32,8 @@ import util.MsgUtils;
 public class MonitorConfigurationBean implements Serializable, ServletContextListener {
     private static final long serialVersionUID = 1L;
     private static final Logger LOG = Logger.getLogger(MonitorConfigurationBean.class);
+    private static final String MONITORS_CFG = "WEB-INF/monitors.properties";
+    private static final String KEY_PREFIX = "row";
     private static final String DEFAULT_INTERVAL = "30";
 
     private String startIp;
@@ -41,11 +51,67 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
     private boolean startDisabled = true;
     private boolean stopDisabled = true;
     private boolean resultsDisabled = true;
+    private boolean loadDisabled = false;
 
     /**
      * Creates a new instance of MonitorConfigurationBean
      */
     public MonitorConfigurationBean() {
+    }
+
+    public void loadConfiguration() {
+        Properties props = new Properties();
+
+        File cfgPropertiesFile = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath(MONITORS_CFG));
+        LOG.info(cfgPropertiesFile.getPath());
+
+        try {
+            props.load(new FileInputStream(cfgPropertiesFile));
+            Set<String> keySet = props.stringPropertyNames();
+            configuredMonitors.clear();
+
+            for (int idx = 0; idx < keySet.size(); ++idx) {
+                String value = props.getProperty(KEY_PREFIX + idx);
+                String[] parts = value.split("#");
+
+                setStartIp(parts[0]);
+                setEndIp(parts[1]);
+                setInterval(parts[2]);
+                setComment(parts[3]);
+
+                addMonitor();
+            }
+        }
+        catch (IOException ioex) {
+            LOG.info(ioex.getMessage());
+            configuredMonitors.clear();
+        }
+    }
+
+    private void saveConfiguration() {
+        Properties props = new Properties();
+
+        int idx = 0;
+        for (MonitorView monitor : configuredMonitors) {
+            String key = KEY_PREFIX + idx;
+            String value = monitor.getStartIp() + "#" + monitor.getEndIp() + "#"
+                    + monitor.getInterval() + "#" + monitor.getComment();
+
+            props.setProperty(key, value);
+
+            ++idx;
+        }
+
+        try {
+            File cfgPropertiesFile = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath(MONITORS_CFG));
+            LOG.info(cfgPropertiesFile.getPath());
+
+            OutputStream oStream = new FileOutputStream(cfgPropertiesFile);
+            props.store(oStream, "");
+        }
+        catch (IOException ioex) {
+            LOG.info(ioex.getMessage());
+        }
     }
 
     public String getStartIp() {
@@ -165,6 +231,14 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
         this.resultsDisabled = resultsDisabled;
     }
 
+    public boolean isLoadDisabled() {
+        return loadDisabled;
+    }
+
+    public void setLoadDisabled(boolean loadDisabled) {
+        this.loadDisabled = loadDisabled;
+    }
+
     /**
      * Add a monitor to the list of configured monitors
      */
@@ -278,6 +352,9 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
      */
     public String startMonitors() {
         if (!isStartDisabled()) {
+            LOG.info("Save configuration");
+            saveConfiguration();
+
             LOG.info("Start monitors");
 
             synchronized (RUNNING_MONITORS) {
@@ -297,6 +374,7 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
             setAddDisabled(true);
             setDeleteDisabled(true);
             setStartDisabled(true);
+            setLoadDisabled(true);
             setStopDisabled(false);
             setResultsDisabled(false);
 
@@ -331,6 +409,7 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
 
             setAddDisabled(false);
             setDeleteDisabled(false);
+            setLoadDisabled(false);
             setStartDisabled(false);
             setStopDisabled(true);
             setResultsDisabled(true);
@@ -367,5 +446,8 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
             }
         }
         LOG.info("All monitors stopped...");
+
+        saveConfiguration();
+        LOG.info("Configuration saved...");
     }
 }
