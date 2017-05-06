@@ -446,8 +446,5 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
             }
         }
         LOG.info("All monitors stopped...");
-
-        saveConfiguration();
-        LOG.info("Configuration saved...");
     }
 }
