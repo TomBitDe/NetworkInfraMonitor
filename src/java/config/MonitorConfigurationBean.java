@@ -311,7 +311,8 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
             setStartDisabled(false);
         }
 
-        MsgUtils.showMessage("Monitor added");
+        LOG.info("Save configuration");
+        saveConfiguration();
     }
 
     /**
@@ -343,6 +344,9 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
             setDeleteDisabled(true);
             setStartDisabled(true);
         }
+
+        LOG.info("Save configuration");
+        saveConfiguration();
     }
 
     /**
@@ -352,9 +356,6 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
      */
     public String startMonitors() {
         if (!isStartDisabled()) {
-            LOG.info("Save configuration");
-            saveConfiguration();
-
             LOG.info("Start monitors");
 
             synchronized (RUNNING_MONITORS) {
