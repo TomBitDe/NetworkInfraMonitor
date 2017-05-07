@@ -17,6 +17,7 @@ import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 
 /**
+ * Handle the monitoring results as tree (TableTree)
  */
 @ManagedBean(name = "NodeResultsBean")
 @SessionScoped
@@ -108,6 +109,9 @@ public class NodeResultsBean implements Serializable {
         return root;
     }
 
+    /**
+     * Update the tree to display
+     */
     public void update() {
         LOG.debug("-->");
 
@@ -150,6 +154,13 @@ public class NodeResultsBean implements Serializable {
         LOG.debug("<--");
     }
 
+    /**
+     * Build a useful monitor node text
+     *
+     * @param monitor the monitor to build the text for
+     *
+     * @return the node text
+     */
     private String buildMonitorNodeText(Monitor monitor) {
         if (monitor.getComment().isEmpty() || commentExists(monitor)) {
             return monitor.getStart() + " - " + monitor.getEnd();
@@ -159,6 +170,13 @@ public class NodeResultsBean implements Serializable {
         }
     }
 
+    /**
+     * Check if a the comment for the given monitor already exists in othe monitors
+     *
+     * @param monitor the monitor to check
+     *
+     * @return true if the comment text already exists, else false
+     */
     private boolean commentExists(Monitor monitor) {
         for (Monitor item : configuration.getRunningMonitors()) {
             if (!item.equals(monitor)) {
@@ -170,6 +188,13 @@ public class NodeResultsBean implements Serializable {
         return false;
     }
 
+    /**
+     * Build a probe result summary for the given monitor
+     *
+     * @param monitor the monitor to build the summary for
+     *
+     * @return 0 if a probe result for a destination in the monitor is false, else true
+     */
     private int buildSummary(Monitor monitor) {
         for (Destination destination : monitor.getDestinations()) {
             if (destination.getProbeResult() == false) {
@@ -179,11 +204,21 @@ public class NodeResultsBean implements Serializable {
         return 1;
     }
 
+    /**
+     * The node has been expanded
+     *
+     * @param event the triggering event
+     */
     public void nodeExpand(NodeExpandEvent event) {
         LOG.debug("Expand " + event.getTreeNode().getData().toString());
         event.getTreeNode().setExpanded(true);
     }
 
+    /**
+     * The node has been collapsed
+     *
+     * @param event the triggering event
+     */
     public void nodeCollapse(NodeCollapseEvent event) {
         LOG.debug("Collapse " + event.getTreeNode().getData().toString());
         event.getTreeNode().setExpanded(false);

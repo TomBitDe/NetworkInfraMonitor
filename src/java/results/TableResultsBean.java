@@ -12,7 +12,7 @@ import monitor.Monitor;
 import org.apache.log4j.Logger;
 
 /**
- * Handle the monitoring results
+ * Handle the monitoring results as table
  */
 @ManagedBean(name = "TableResultsBean")
 @ViewScoped

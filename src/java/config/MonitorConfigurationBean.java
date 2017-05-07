@@ -59,6 +59,9 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
     public MonitorConfigurationBean() {
     }
 
+    /**
+     * Load the last configuration form properties file
+     */
     public void loadConfiguration() {
         Properties props = new Properties();
 
@@ -88,6 +91,9 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
         }
     }
 
+    /**
+     * Save the current configuration in properties file
+     */
     private void saveConfiguration() {
         Properties props = new Properties();
 

@@ -7,6 +7,7 @@ import java.util.Objects;
 import org.apache.log4j.Logger;
 
 /**
+ * The document to use for the node result view
  */
 public class NodeResultsDocument implements Serializable, Comparable<NodeResultsDocument> {
     private static final long serialVersionUID = 1L;
