@@ -64,12 +64,14 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
      */
     public void loadConfiguration() {
         Properties props = new Properties();
+        FileInputStream fis = null;
 
         File cfgPropertiesFile = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath(MONITORS_CFG));
         LOG.info(cfgPropertiesFile.getPath());
 
         try {
-            props.load(new FileInputStream(cfgPropertiesFile));
+            fis = new FileInputStream(cfgPropertiesFile);
+            props.load(fis);
             Set<String> keySet = props.stringPropertyNames();
             configuredMonitors.clear();
 
@@ -84,8 +86,17 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
 
                 addMonitor();
             }
+            fis.close();
         }
         catch (IOException ioex) {
+            if (fis != null) {
+                try {
+                    fis.close();
+                }
+                catch (IOException ex) {
+                    LOG.error(ex.getMessage());
+                }
+            }
             LOG.info(ioex.getMessage());
             configuredMonitors.clear();
         }
@@ -108,14 +119,26 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
             ++idx;
         }
 
+        OutputStream oStream = null;
+
         try {
             File cfgPropertiesFile = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath(MONITORS_CFG));
             LOG.info(cfgPropertiesFile.getPath());
 
-            OutputStream oStream = new FileOutputStream(cfgPropertiesFile);
+            oStream = new FileOutputStream(cfgPropertiesFile);
             props.store(oStream, "");
+
+            oStream.close();
         }
         catch (IOException ioex) {
+            if (oStream != null) {
+                try {
+                    oStream.close();
+                }
+                catch (IOException ex) {
+                    LOG.error(ex.getMessage());
+                }
+            }
             LOG.info(ioex.getMessage());
         }
     }

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Locale;
 import org.apache.log4j.Logger;
 
 /**
@@ -39,17 +40,18 @@ public class PingProbe implements Probe, Runnable {
 
     @Override
     public void probe() {
+        BufferedReader bufferedReader = null;
         boolean result = true;
 
         destination.setLastProbe(LocalDateTime.now());
 
         try {
-            boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
+            boolean isWindows = System.getProperty("os.name").toLowerCase(Locale.getDefault()).contains("win");
 
             ProcessBuilder processBuilder = new ProcessBuilder("ping", isWindows ? "-n" : "-c", "1", destination.getInetAddr().getHostAddress());
             Process proc = processBuilder.start();
 
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+            bufferedReader = new BufferedReader(new InputStreamReader(proc.getInputStream()));
             String line;
 
             while ((line = bufferedReader.readLine()) != null) {
@@ -63,6 +65,14 @@ public class PingProbe implements Probe, Runnable {
         catch (IOException ex) {
             LOG.error(ex.getMessage());
             result = false;
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                }
+                catch (IOException ex1) {
+                    LOG.error(ex1.getMessage());
+                }
+            }
         }
 
         destination.setProbeResult(result);
@@ -101,7 +111,7 @@ public class PingProbe implements Probe, Runnable {
         boolean result = false;
 
         for (String failKeyword : KEYWORDS) {
-            if (line.toUpperCase().contains(failKeyword.toUpperCase())) {
+            if (line.toUpperCase(Locale.getDefault()).contains(failKeyword.toUpperCase(Locale.getDefault()))) {
                 result = true;
                 break;
             }
