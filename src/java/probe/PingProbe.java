@@ -4,6 +4,7 @@ import destination.Destination;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Locale;
@@ -51,7 +52,7 @@ public class PingProbe implements Probe, Runnable {
             ProcessBuilder processBuilder = new ProcessBuilder("ping", isWindows ? "-n" : "-c", "1", destination.getInetAddr().getHostAddress());
             Process proc = processBuilder.start();
 
-            bufferedReader = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+            bufferedReader = new BufferedReader(new InputStreamReader(proc.getInputStream(), StandardCharsets.UTF_8));
             String line;
 
             while ((line = bufferedReader.readLine()) != null) {
