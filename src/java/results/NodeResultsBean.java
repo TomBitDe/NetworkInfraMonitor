@@ -171,7 +171,7 @@ public class NodeResultsBean implements Serializable {
     }
 
     /**
-     * Check if a the comment for the given monitor already exists in othe monitors
+     * Check if a the comment for the given monitor already exists in other monitors
      *
      * @param monitor the monitor to check
      *
