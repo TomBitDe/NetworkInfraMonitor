@@ -3,6 +3,7 @@ package probe;
 import destination.Destination;
 
 /**
+ * Use this interface to define a new probe.
  */
 public interface Probe {
     /**
