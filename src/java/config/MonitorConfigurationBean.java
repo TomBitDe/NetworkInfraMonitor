@@ -60,7 +60,7 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
     }
 
     /**
-     * Load the last configuration form properties file
+     * Load the last configuration from properties file
      */
     public void loadConfiguration() {
         Properties props = new Properties();
