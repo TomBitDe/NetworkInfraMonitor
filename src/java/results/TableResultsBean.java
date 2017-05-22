@@ -56,10 +56,16 @@ public class TableResultsBean implements Serializable {
      */
     public List<Destination> getDestinations() {
         destinations.clear();
-        for (Monitor monitor : configuration.getRunningMonitors()) {
-            for (Destination destination : monitor.getDestinations()) {
-                destinations.add(destination);
+
+        if (configuration != null) {
+            for (Monitor monitor : configuration.getRunningMonitors()) {
+                for (Destination destination : monitor.getDestinations()) {
+                    destinations.add(destination);
+                }
             }
+            LOG.debug("Found " + configuration.getRunningMonitors().size() + " monitors "
+                    + "and overall " + destinations.size() + " destinations");
+
         }
         return destinations;
     }
