@@ -8,6 +8,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 /**
+ * Probe a destination using different probes.
  */
 public class Prober implements Runnable {
     private static final Logger LOG = Logger.getLogger(Prober.class);
@@ -16,13 +17,20 @@ public class Prober implements Runnable {
     private boolean running = true;
     private final List<Probe> probeList;
 
+    /**
+     * Define a prober for a destination.
+     *
+     * @param destination the target destination to use the probes for
+     */
     public Prober(Destination destination) {
         this.destination = destination;
 
         this.probeList = new ArrayList<>();
 
         probeList.add(new EchoProbe(destination));
-        probeList.add(new PingProbe(destination));
+
+        // Do not use ping until it is more improved
+        // probeList.add(new PingProbe(destination));
     }
 
     public Destination getDestination() {
@@ -37,6 +45,11 @@ public class Prober implements Runnable {
         this.running = running;
     }
 
+    /**
+     * Do the probes for a destination.
+     *
+     * @param destination the destination to probe
+     */
     public void probe(Destination destination) {
         for (Probe probe : probeList) {
 
