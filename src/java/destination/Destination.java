@@ -44,7 +44,6 @@ public class Destination implements Serializable {
             this.interval = interval;
         }
 
-        this.interval = interval;
         this.lastProbe = LocalDateTime.now().minusSeconds(this.interval);
     }
 
