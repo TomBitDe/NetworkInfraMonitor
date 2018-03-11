@@ -17,7 +17,7 @@ import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 
 /**
- * Handle the monitoring results as tree (TableTree)
+ * Handle the monitoring results as tree (TableTree).
  */
 @ManagedBean(name = "NodeResultsBean")
 @SessionScoped
@@ -34,13 +34,13 @@ public class NodeResultsBean implements Serializable {
     private TreeNode root;
 
     /**
-     * Creates a new instance of NodeResultsBean
+     * Creates a new instance of NodeResultsBean.
      */
     public NodeResultsBean() {
     }
 
     /**
-     * Get the current configuration; needed because configuration is a @ManagedProperty
+     * Get the current configuration; needed because configuration is a @ManagedProperty.
      *
      * @return the bean
      */
@@ -49,7 +49,7 @@ public class NodeResultsBean implements Serializable {
     }
 
     /**
-     * Set the current configuration; needed because configuration is a @ManagedProperty
+     * Set the current configuration; needed because configuration is a @ManagedProperty.
      *
      * @param configuration the bean
      */
@@ -79,7 +79,7 @@ public class NodeResultsBean implements Serializable {
     }
 
     /**
-     * Buildup the tree to display
+     * Buildup the tree to display.
      *
      * @return the root node of the tree
      */
@@ -110,7 +110,7 @@ public class NodeResultsBean implements Serializable {
     }
 
     /**
-     * Update the tree to display
+     * Update the tree to display.
      */
     public void update() {
         LOG.debug("-->");
@@ -155,7 +155,7 @@ public class NodeResultsBean implements Serializable {
     }
 
     /**
-     * Build a useful monitor node text
+     * Build a useful monitor node text.
      *
      * @param monitor the monitor to build the text for
      *
@@ -171,7 +171,7 @@ public class NodeResultsBean implements Serializable {
     }
 
     /**
-     * Check if a the comment for the given monitor already exists in other monitors
+     * Check if a the comment for the given monitor already exists in other monitors.
      *
      * @param monitor the monitor to check
      *
@@ -189,7 +189,7 @@ public class NodeResultsBean implements Serializable {
     }
 
     /**
-     * Build a probe result summary for the given monitor
+     * Build a probe result summary for the given monitor.
      *
      * @param monitor the monitor to build the summary for
      *
@@ -205,7 +205,7 @@ public class NodeResultsBean implements Serializable {
     }
 
     /**
-     * The node has been expanded
+     * The node has been expanded.
      *
      * @param event the triggering event
      */
@@ -215,7 +215,7 @@ public class NodeResultsBean implements Serializable {
     }
 
     /**
-     * The node has been collapsed
+     * The node has been collapsed.
      *
      * @param event the triggering event
      */

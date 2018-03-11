@@ -12,7 +12,7 @@ import monitor.Monitor;
 import org.apache.log4j.Logger;
 
 /**
- * Handle the monitoring results as table
+ * Handle the monitoring results as table.
  */
 @ManagedBean(name = "TableResultsBean")
 @ViewScoped
@@ -26,13 +26,13 @@ public class TableResultsBean implements Serializable {
     private MonitorConfigurationBean configuration;
 
     /**
-     * Creates a new instance of MonitoringResultsBean
+     * Creates a new instance of MonitoringResultsBean.
      */
     public TableResultsBean() {
     }
 
     /**
-     * Get the current configuration; needed because configuration is a @ManagedProperty
+     * Get the current configuration; needed because configuration is a @ManagedProperty.
      *
      * @return the bean
      */
@@ -41,7 +41,7 @@ public class TableResultsBean implements Serializable {
     }
 
     /**
-     * Set the current configuration; needed because configuration is a @ManagedProperty
+     * Set the current configuration; needed because configuration is a @ManagedProperty.
      *
      * @param configuration the bean
      */
@@ -50,7 +50,7 @@ public class TableResultsBean implements Serializable {
     }
 
     /**
-     * Get all the destinations of the current configuration
+     * Get all the destinations of the current configuration.
      *
      * @return the destinations
      */

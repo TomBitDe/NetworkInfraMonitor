@@ -24,7 +24,7 @@ import util.IpUtils;
 import util.MsgUtils;
 
 /**
- * Handle the monitoring configuration
+ * Handle the monitoring configuration.
  */
 @WebListener
 @ManagedBean(name = "MonitorConfigurationBean")
@@ -54,13 +54,13 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
     private boolean loadDisabled = false;
 
     /**
-     * Creates a new instance of MonitorConfigurationBean
+     * Creates a new instance of MonitorConfigurationBean.
      */
     public MonitorConfigurationBean() {
     }
 
     /**
-     * Load the last configuration from properties file
+     * Load the last configuration from properties file.
      */
     public void loadConfiguration() {
         Properties props = new Properties();
@@ -103,7 +103,7 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
     }
 
     /**
-     * Save the current configuration in properties file
+     * Save the current configuration in properties file.
      */
     private void saveConfiguration() {
         Properties props = new Properties();
@@ -176,7 +176,7 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
     }
 
     /**
-     * Get all the configured monitors
+     * Get all the configured monitors.
      *
      * @return the monitors as MonitorView list
      */
@@ -185,7 +185,7 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
     }
 
     /**
-     * Set all monitors as the current configuration
+     * Set all monitors as the current configuration.
      *
      * @param configuredMonitors the MonitorView list
      */
@@ -194,7 +194,7 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
     }
 
     /**
-     * Get the selected monitors
+     * Get the selected monitors.
      *
      * @return the selected monitors as MonitorView list
      */
@@ -203,7 +203,7 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
     }
 
     /**
-     * Set the selected monitors
+     * Set the selected monitors.
      *
      * @param selectedMonitors the MonitorView list
      */
@@ -212,7 +212,7 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
     }
 
     /**
-     * Get the currently running monitors
+     * Get the currently running monitors.
      *
      * @return the monitors
      */
@@ -269,7 +269,7 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
     }
 
     /**
-     * Add a monitor to the list of configured monitors
+     * Add a monitor to the list of configured monitors.
      */
     public void addMonitor() {
         // Check the start IP
@@ -345,7 +345,7 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
     }
 
     /**
-     * Delete the selected monitors from the list of configured monitors
+     * Delete the selected monitors from the list of configured monitors.
      */
     public void deleteSelection() {
         LOG.debug("Selected monitors:");
@@ -379,7 +379,7 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
     }
 
     /**
-     * Start the monitors of the configured monitors list. Set buttons accordingly
+     * Start the monitors of the configured monitors list. Set buttons accordingly.
      *
      * @return the next faces page to go
      */
@@ -420,7 +420,7 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
     }
 
     /**
-     * Stop the currently running monitors. Set buttons accordingly
+     * Stop the currently running monitors. Set buttons accordingly.
      */
     public void stopMonitors() {
         if (!isStopDisabled()) {
@@ -458,7 +458,7 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
     }
 
     /**
-     * Stop the running moitors if the web server stopps
+     * Stop the running moitors if the web server stops.
      *
      * @param sce the event
      */

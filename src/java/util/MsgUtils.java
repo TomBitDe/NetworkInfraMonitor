@@ -4,11 +4,30 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 /**
- * Helper methods for faces messages
+ * Helper methods for faces messages.
  */
 public class MsgUtils {
     /**
-     * Show a fatal message
+     * Creating an instance is not allowed.
+     */
+    private MsgUtils() {
+    }
+
+    /**
+     * Clone is not allowed.
+     *
+     * @return never return something
+     *
+     * @throws CloneNotSupportedException in any case
+     */
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        super.clone();
+        throw new CloneNotSupportedException();
+    }
+
+    /**
+     * Show a fatal message.
      *
      * @param msg the text to display
      */
@@ -19,7 +38,7 @@ public class MsgUtils {
     }
 
     /**
-     * Show an error message
+     * Show an error message.
      *
      * @param msg the text to display
      */
@@ -30,7 +49,7 @@ public class MsgUtils {
     }
 
     /**
-     * Show a warning message
+     * Show a warning message.
      *
      * @param msg the text to display
      */
@@ -41,7 +60,7 @@ public class MsgUtils {
     }
 
     /**
-     * Show a message
+     * Show a message.
      *
      * @param msg the text to display
      */

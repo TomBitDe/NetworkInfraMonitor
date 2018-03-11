@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 import util.IpUtils;
 
 /**
- * A view on the monitor data
+ * A view on the monitor data.
  */
 @ManagedBean(name = "MonitorView")
 @ViewScoped
@@ -25,7 +25,7 @@ public class MonitorView implements Serializable {
     private String comment;
 
     /**
-     * Creates a new instance of MonitorView
+     * Creates a new instance of MonitorView.
      *
      * @param startIp  the start IP of the monitoring range
      * @param endIp    the end IP of the monitoring range

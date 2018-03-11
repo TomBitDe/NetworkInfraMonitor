@@ -5,13 +5,32 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 /**
- * Helper methods for IP addresses
+ * Helper methods for IP addresses.
  */
 public class IpUtils {
     private static final Logger LOG = Logger.getLogger(IpUtils.class);
 
     /**
-     * Check if an IP addresses format and value is valid
+     * Creating an instance is not allowed.
+     */
+    private IpUtils() {
+    }
+
+    /**
+     * Clone is not allowed.
+     *
+     * @return never return something
+     *
+     * @throws CloneNotSupportedException in any case
+     */
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        super.clone();
+        throw new CloneNotSupportedException();
+    }
+
+    /**
+     * Check if an IP addresses format and value is valid.
      *
      * @param ip the IP address e.g. "198.168.1.23"
      *
@@ -48,7 +67,7 @@ public class IpUtils {
     }
 
     /**
-     * Check if an IP address range is valid
+     * Check if an IP address range is valid.
      *
      * @param start the starting IP address of the range definition
      * @param end   the ending IP address of the range definition
@@ -90,7 +109,7 @@ public class IpUtils {
     }
 
     /**
-     * Create a list of IP addresses in the given range
+     * Create a list of IP addresses in the given range.
      *
      * @param start the starting IP address of the range definition
      * @param end   the ending IP address of the range definition
@@ -113,7 +132,7 @@ public class IpUtils {
     }
 
     /**
-     * Convert an IP address to a hex string
+     * Convert an IP address to a hex string.
      *
      * @param ipAddress Input IP address
      *
@@ -126,7 +145,7 @@ public class IpUtils {
     }
 
     /**
-     * Convert an IP address to a number
+     * Convert an IP address to a number.
      *
      * @param ipAddress Input IP address
      *
@@ -146,7 +165,7 @@ public class IpUtils {
     }
 
     /**
-     * Convert an IP address to a String
+     * Convert an IP address to a String.
      *
      * @param ip Input IP address
      *

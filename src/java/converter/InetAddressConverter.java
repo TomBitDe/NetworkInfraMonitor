@@ -10,7 +10,7 @@ import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
 /**
- * Converter for InetAddresses
+ * Converter for InetAddresses.
  */
 @FacesConverter("InetAddressConverter")
 public class InetAddressConverter implements Converter {

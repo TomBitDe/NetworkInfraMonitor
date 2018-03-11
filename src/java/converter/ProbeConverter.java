@@ -8,7 +8,7 @@ import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
 /**
- * Converter for prober name values
+ * Converter for prober name values.
  */
 @FacesConverter("ProbeConverter")
 public class ProbeConverter implements Converter {

@@ -16,7 +16,7 @@ import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
 /**
- * Converter for LocalDateTime
+ * Converter for LocalDateTime.
  */
 @FacesConverter("LocalDateTimeConverter")
 public class LocalDateTimeConverter implements Converter {

@@ -7,7 +7,7 @@ import java.util.Objects;
 import org.apache.log4j.Logger;
 
 /**
- * A destination to probe
+ * A destination to probe.
  */
 public class Destination implements Serializable {
     private static final long serialVersionUID = 1L;

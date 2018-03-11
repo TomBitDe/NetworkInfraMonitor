@@ -8,7 +8,7 @@ import java.time.temporal.ChronoUnit;
 import org.apache.log4j.Logger;
 
 /**
- * An echo probe
+ * An echo probe.
  */
 public class EchoProbe implements Probe, Runnable {
     private static final Logger LOG = Logger.getLogger(EchoProbe.class);

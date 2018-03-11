@@ -15,7 +15,7 @@ import probe.Prober;
 import util.IpUtils;
 
 /**
- * A monitor for an IP address range
+ * A monitor for an IP address range.
  */
 public class Monitor implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -80,7 +80,7 @@ public class Monitor implements Serializable {
     }
 
     /**
-     * Get all the destinations the monitor handles
+     * Get all the destinations the monitor handles.
      *
      * @return the destinations
      */
@@ -89,7 +89,7 @@ public class Monitor implements Serializable {
     }
 
     /**
-     * Build the destinations that are in the range to monitor
+     * Build the destinations that are in the range to monitor.
      *
      * @param start the start of the range
      * @param end   the end of the range
@@ -115,9 +115,9 @@ public class Monitor implements Serializable {
     }
 
     /**
-     * Start the monitoring for the range
+     * Start the monitoring for the range.
      *
-     * @throws InterruptedException
+     * @throws InterruptedException in case the thread is interrupted
      */
     public void start() throws InterruptedException {
         LOG.debug("Start");
@@ -144,7 +144,7 @@ public class Monitor implements Serializable {
     }
 
     /**
-     * Stop the monitoring for the range
+     * Stop the monitoring for the range.
      */
     public void stop() {
         LOG.debug("Stop");

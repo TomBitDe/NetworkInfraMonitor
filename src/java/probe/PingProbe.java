@@ -11,7 +11,7 @@ import java.util.Locale;
 import org.apache.log4j.Logger;
 
 /**
- * A ping probe
+ * A ping probe.
  */
 public class PingProbe implements Probe, Runnable {
     private static final Logger LOG = Logger.getLogger(PingProbe.class);

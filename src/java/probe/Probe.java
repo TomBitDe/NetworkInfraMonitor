@@ -21,7 +21,7 @@ public interface Probe {
     /**
      * Stop the probe thread by setting to false
      *
-     * @param running
+     * @param running false to stop the probe thread
      */
     public void setRunning(boolean running);
 

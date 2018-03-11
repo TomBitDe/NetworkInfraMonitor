@@ -1,7 +1,7 @@
 package monitor;
 
 /**
- * Test runner for a monitor
+ * Test runner for a monitor.
  */
 public class Runner {
     public static void main(String[] args) throws InterruptedException {
