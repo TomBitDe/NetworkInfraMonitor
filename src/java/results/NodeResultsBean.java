@@ -22,15 +22,33 @@ import org.primefaces.model.TreeNode;
 @ManagedBean(name = "NodeResultsBean")
 @SessionScoped
 public class NodeResultsBean implements Serializable {
+    /**
+     * Needed for proper serializable implementation.
+     */
     private static final long serialVersionUID = 1L;
+    /**
+     * A logger.
+     */
     private static final Logger LOG = Logger.getLogger(NodeResultsBean.class);
 
+    /**
+     * The monitor type value.
+     */
     private static final String MONITOR_TYPE = "monitor";
+    /**
+     * The destination type value.
+     */
     private static final String DESTINATION_TYPE = "destination";
 
+    /**
+     * A reference to the monitor configuration.
+     */
     @ManagedProperty("#{MonitorConfigurationBean}")
     private MonitorConfigurationBean configuration;
 
+    /**
+     * The trees root.
+     */
     private TreeNode root;
 
     /**
@@ -57,22 +75,45 @@ public class NodeResultsBean implements Serializable {
         this.configuration = configuration;
     }
 
+    /**
+     * Get the tree root node.
+     *
+     * @return the root node
+     */
     public TreeNode getRoot() {
         return root;
     }
 
+    /**
+     * Set the tree root node.
+     *
+     * @param root the root node
+     */
     public void setRoot(TreeNode root) {
         this.root = root;
     }
 
+    /**
+     * Get the monitor type value.
+     *
+     * @return the monitor type
+     */
     public String getMONITOR_TYPE() {
         return MONITOR_TYPE;
     }
 
+    /**
+     * Get the destination type value.
+     *
+     * @return the destination type
+     */
     public String getDESTINATION_TYPE() {
         return DESTINATION_TYPE;
     }
 
+    /**
+     * Initialize the tree.
+     */
     @PostConstruct
     public void init() {
         root = createTree();

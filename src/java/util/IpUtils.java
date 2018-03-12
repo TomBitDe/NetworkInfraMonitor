@@ -8,6 +8,9 @@ import org.apache.log4j.Logger;
  * Helper methods for IP addresses.
  */
 public class IpUtils {
+    /**
+     * A logger.
+     */
     private static final Logger LOG = Logger.getLogger(IpUtils.class);
 
     /**

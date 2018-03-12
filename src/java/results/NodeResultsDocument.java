@@ -10,7 +10,13 @@ import org.apache.log4j.Logger;
  * The document to use for the node result view.
  */
 public class NodeResultsDocument implements Serializable, Comparable<NodeResultsDocument> {
+    /**
+     * Needed for proper serializable implementation.
+     */
     private static final long serialVersionUID = 1L;
+    /**
+     * A logger.
+     */
     private static final Logger LOG = Logger.getLogger(NodeResultsDocument.class);
 
     // Monitor items to display

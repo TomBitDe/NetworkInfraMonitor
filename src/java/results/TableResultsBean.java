@@ -17,11 +17,23 @@ import org.apache.log4j.Logger;
 @ManagedBean(name = "TableResultsBean")
 @ViewScoped
 public class TableResultsBean implements Serializable {
+    /**
+     * Needed for proper serializable implementation.
+     */
     private static final long serialVersionUID = 1L;
+    /**
+     * A logger.
+     */
     private static final Logger LOG = Logger.getLogger(TableResultsBean.class);
 
+    /**
+     * A list of destinations.
+     */
     private final List<Destination> destinations = new ArrayList<>();
 
+    /**
+     * A reference to the monitor configuration.
+     */
     @ManagedProperty("#{MonitorConfigurationBean}")
     private MonitorConfigurationBean configuration;
 

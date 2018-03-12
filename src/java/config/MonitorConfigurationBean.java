@@ -24,39 +24,102 @@ import util.IpUtils;
 import util.MsgUtils;
 
 /**
- * Handle the monitoring configuration.
+ * Handle the monitoring configuration view.
  */
 @WebListener
 @ManagedBean(name = "MonitorConfigurationBean")
 @ApplicationScoped
 public class MonitorConfigurationBean implements Serializable, ServletContextListener {
+    /**
+     * Needed for proper serializable implementation.
+     */
     private static final long serialVersionUID = 1L;
+    /**
+     * A logger.
+     */
     private static final Logger LOG = Logger.getLogger(MonitorConfigurationBean.class);
+    /**
+     * The path to put monitor configuration.
+     */
     private static final String MONITORS_CFG = "WEB-INF/monitors.properties";
+    /**
+     * Key prefix value.
+     */
     private static final String KEY_PREFIX = "row";
+    /**
+     * The default interval value.
+     */
     private static final String DEFAULT_INTERVAL = "30";
+    /**
+     * The minimum interval entry value to test for.
+     */
+    private static final int INTERVAL_MIN_VALUE = 9;
+    /**
+     * The maximum interval entry value to test for.
+     */
+    private static final int INTERVAL_MAX_VALUE = 300;
 
+    /**
+     * Start IP entry.
+     */
     private String startIp;
+    /**
+     * End IP entry.
+     */
     private String endIp;
+    /**
+     * Interval entry.
+     */
     private String interval;
+    /**
+     * Comment entry.
+     */
     private String comment;
 
+    /**
+     * A list of configured monitors in the datatable view.
+     */
     private List<MonitorView> configuredMonitors = new ArrayList<>();
+    /**
+     * A list of selected monitors in the datatable view.
+     */
     private List<MonitorView> selectedMonitors;
 
+    /**
+     * A list of running monitors
+     */
     private static final List<Monitor> RUNNING_MONITORS = Collections.synchronizedList(new ArrayList<>());
 
+    /**
+     * Is add button disabled.
+     */
     private boolean addDisabled = false;
+    /**
+     * Is delete button disabled.
+     */
     private boolean deleteDisabled = true;
+    /**
+     * Is start button disabled.
+     */
     private boolean startDisabled = true;
+    /**
+     * Is stop button disabled.
+     */
     private boolean stopDisabled = true;
+    /**
+     * Is result button disabled.
+     */
     private boolean resultsDisabled = true;
+    /**
+     * Is load button disabled.
+     */
     private boolean loadDisabled = false;
 
     /**
      * Creates a new instance of MonitorConfigurationBean.
      */
     public MonitorConfigurationBean() {
+        super();
     }
 
     /**
@@ -143,34 +206,74 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
         }
     }
 
+    /**
+     * Get the start IP entry value.
+     *
+     * @return the start IP
+     */
     public String getStartIp() {
         return startIp;
     }
 
+    /**
+     * Set the start IP entry value.
+     *
+     * @param startIp the start IP
+     */
     public void setStartIp(String startIp) {
         this.startIp = startIp;
     }
 
+    /**
+     * Get the end IP entry value.
+     *
+     * @return the end IP
+     */
     public String getEndIp() {
         return endIp;
     }
 
+    /**
+     * Set the end IP entry value.
+     *
+     * @param endIp the end IP
+     */
     public void setEndIp(String endIp) {
         this.endIp = endIp;
     }
 
+    /**
+     * Get the interval entry value.
+     *
+     * @return the interval
+     */
     public String getInterval() {
         return interval;
     }
 
+    /**
+     * Set the interval entry value.
+     *
+     * @param interval the interval
+     */
     public void setInterval(String interval) {
         this.interval = interval;
     }
 
+    /**
+     * Get the comment text entry value.
+     *
+     * @return the comment text
+     */
     public String getComment() {
         return comment;
     }
 
+    /**
+     * Set the comment text entry value.
+     *
+     * @param comment the comment text
+     */
     public void setComment(String comment) {
         this.comment = comment;
     }
@@ -220,50 +323,110 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
         return RUNNING_MONITORS;
     }
 
+    /**
+     * Check if the add button is disabled.
+     *
+     * @return true if disabled
+     */
     public boolean isAddDisabled() {
         return addDisabled;
     }
 
+    /**
+     * Set the add button disabled.
+     *
+     * @param addDisabled true if button needs to be diaabled, else false
+     */
     public void setAddDisabled(boolean addDisabled) {
         this.addDisabled = addDisabled;
     }
 
+    /**
+     * Check if the delete button is disabled.
+     *
+     * @return true if disabled
+     */
     public boolean isDeleteDisabled() {
         return deleteDisabled;
     }
 
+    /**
+     * Set the delete button disabled.
+     *
+     * @param deleteDisabled true if button needs to be diaabled, else false
+     */
     public void setDeleteDisabled(boolean deleteDisabled) {
         this.deleteDisabled = deleteDisabled;
     }
 
+    /**
+     * Check if the start button is disabled.
+     *
+     * @return true if disabled
+     */
     public boolean isStartDisabled() {
         return startDisabled;
     }
 
+    /**
+     * Set the start button disabled.
+     *
+     * @param startDisabled true if button needs to be diaabled, else false
+     */
     public void setStartDisabled(boolean startDisabled) {
         this.startDisabled = startDisabled;
     }
 
+    /**
+     * Check if the stop button is disabled.
+     *
+     * @return true if disabled
+     */
     public boolean isStopDisabled() {
         return stopDisabled;
     }
 
+    /**
+     * Set the stop button disabled.
+     *
+     * @param stopDisabled true if button needs to be diaabled, else false
+     */
     public void setStopDisabled(boolean stopDisabled) {
         this.stopDisabled = stopDisabled;
     }
 
+    /**
+     * Check if the results button is disabled.
+     *
+     * @return true if disabled
+     */
     public boolean isResultsDisabled() {
         return resultsDisabled;
     }
 
+    /**
+     * Set the results button disabled.
+     *
+     * @param resultsDisabled true if button needs to be diaabled, else false
+     */
     public void setResultsDisabled(boolean resultsDisabled) {
         this.resultsDisabled = resultsDisabled;
     }
 
+    /**
+     * Check if the load button is disabled.
+     *
+     * @return true if disabled
+     */
     public boolean isLoadDisabled() {
         return loadDisabled;
     }
 
+    /**
+     * Set the load button disabled.
+     *
+     * @param loadDisabled true if button needs to be diaabled, else false
+     */
     public void setLoadDisabled(boolean loadDisabled) {
         this.loadDisabled = loadDisabled;
     }
@@ -296,8 +459,9 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
         else {
             try {
                 int num = Integer.parseInt(interval);
-                if (num <= 9 || num > 300) {
-                    MsgUtils.showErrorMessage("Interval is out of range 10-300. Enter an interval between 10 and 300 !");
+                if (num <= INTERVAL_MIN_VALUE || num > INTERVAL_MAX_VALUE) {
+                    MsgUtils.showErrorMessage("Interval is out of range " + INTERVAL_MIN_VALUE + "-" + INTERVAL_MAX_VALUE
+                            + ". Enter an interval between " + INTERVAL_MIN_VALUE + " and " + INTERVAL_MAX_VALUE + " !");
                     return;
                 }
             }
@@ -452,6 +616,11 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
         }
     }
 
+    /**
+     * Nothing to implement here.
+     *
+     * @param sce the servlet context event
+     */
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         // Nothing to do here

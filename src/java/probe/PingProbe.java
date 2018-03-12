@@ -14,12 +14,29 @@ import org.apache.log4j.Logger;
  * A ping probe.
  */
 public class PingProbe implements Probe, Runnable {
+    /**
+     * A logger.
+     */
     private static final Logger LOG = Logger.getLogger(PingProbe.class);
+    /**
+     * Keywords for checking if a ping request failed.
+     */
     private static final String[] KEYWORDS = {"nicht erreichbar", "not reachable", "berschreitung", "timeout"};
 
+    /**
+     * The destination to work on.
+     */
     private final Destination destination;
+    /**
+     * Indicate if this echo probe is running.
+     */
     private boolean running = true;
 
+    /**
+     * Create a ping probe for the given destination.
+     *
+     * @param destination the destination to work on
+     */
     public PingProbe(Destination destination) {
         this.destination = destination;
     }
@@ -107,6 +124,13 @@ public class PingProbe implements Probe, Runnable {
         }
     }
 
+    /**
+     * Check if the response text line contains a keyword that indicated a probe failure.
+     *
+     * @param line the response text line
+     *
+     * @return true if line contains a fail keyword
+     */
     private static boolean containsFailKeywords(String line) {
         LOG.trace("line=[" + line + ']');
         boolean result = false;

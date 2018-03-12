@@ -11,10 +11,22 @@ import org.apache.log4j.Logger;
  * Probe a destination using different probes.
  */
 public class Prober implements Runnable {
+    /**
+     * A looger.
+     */
     private static final Logger LOG = Logger.getLogger(Prober.class);
 
+    /**
+     * A destination to work on.
+     */
     private final Destination destination;
+    /**
+     * Indicate if this thread is running.
+     */
     private boolean running = true;
+    /**
+     * A list of probes to do.
+     */
     private final List<Probe> probeList;
 
     /**
@@ -33,14 +45,29 @@ public class Prober implements Runnable {
         // probeList.add(new PingProbe(destination));
     }
 
+    /**
+     * Get the destination to work on.
+     *
+     * @return the destination
+     */
     public Destination getDestination() {
         return destination;
     }
 
+    /**
+     * Check if the thread running.
+     *
+     * @return true if it is running
+     */
     public boolean isRunning() {
         return running;
     }
 
+    /**
+     * Set the running state of the thread.
+     *
+     * @param running true if it is running
+     */
     public void setRunning(boolean running) {
         this.running = running;
     }

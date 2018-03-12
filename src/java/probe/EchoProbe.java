@@ -11,11 +11,25 @@ import org.apache.log4j.Logger;
  * An echo probe.
  */
 public class EchoProbe implements Probe, Runnable {
+    /**
+     * A logger.
+     */
     private static final Logger LOG = Logger.getLogger(EchoProbe.class);
 
+    /**
+     * The destination to work on.
+     */
     private final Destination destination;
+    /**
+     * Indicate if this echo probe is running.
+     */
     private boolean running = true;
 
+    /**
+     * Create an echo probe for the given destination.
+     *
+     * @param destination the destination to work on
+     */
     public EchoProbe(Destination destination) {
         this.destination = destination;
     }

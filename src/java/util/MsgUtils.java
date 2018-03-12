@@ -2,11 +2,17 @@ package util;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import org.apache.log4j.Logger;
 
 /**
  * Helper methods for faces messages.
  */
 public class MsgUtils {
+    /**
+     * A logger.
+     */
+    private static final Logger LOG = Logger.getLogger(MsgUtils.class);
+
     /**
      * Creating an instance is not allowed.
      */
@@ -34,6 +40,7 @@ public class MsgUtils {
     public static void showFatalMessage(String msg) {
         FacesContext context = FacesContext.getCurrentInstance();
 
+        LOG.fatal(msg);
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal", msg));
     }
 
@@ -45,6 +52,7 @@ public class MsgUtils {
     public static void showErrorMessage(String msg) {
         FacesContext context = FacesContext.getCurrentInstance();
 
+        LOG.error(msg);
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", msg));
     }
 
@@ -56,6 +64,7 @@ public class MsgUtils {
     public static void showWarningMessage(String msg) {
         FacesContext context = FacesContext.getCurrentInstance();
 
+        LOG.warn(msg);
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", msg));
     }
 
@@ -67,6 +76,7 @@ public class MsgUtils {
     public static void showMessage(String msg) {
         FacesContext context = FacesContext.getCurrentInstance();
 
+        LOG.info(msg);
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", msg));
     }
 }

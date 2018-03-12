@@ -15,7 +15,9 @@ import probe.Prober;
 import util.IpUtils;
 
 /**
- * A monitor for an IP address range.
+ * A monitor for an IP address range.<br>
+ * <br>
+ * The monitor contains a list of all desinations controlled by the monitor.
  */
 public class Monitor implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -30,6 +32,9 @@ public class Monitor implements Serializable {
     private ExecutorService service;
     private transient List<Future> futureList;
 
+    /**
+     * Create a monitor with default values.
+     */
     public Monitor() {
         this.start = "";
         this.end = "";
@@ -37,6 +42,13 @@ public class Monitor implements Serializable {
         this.comment = "";
     }
 
+    /**
+     * Create a monitor for a single IP address.
+     *
+     * @param ip       the IP for this monitor (single IP monitor)
+     * @param interval the monitoring interval
+     * @param comment  a comment text for the monitor
+     */
     public Monitor(String ip, int interval, String comment) {
         this.start = ip;
         this.end = ip;
@@ -46,6 +58,14 @@ public class Monitor implements Serializable {
         destinations = buildDestinations(ip, ip);
     }
 
+    /**
+     * Create a monitor for a range of IP addresses.
+     *
+     * @param start    the IP address to start with
+     * @param end      the IP address to end with
+     * @param interval the monitoring interval
+     * @param comment  a comment text for the monitor
+     */
     public Monitor(String start, String end, int interval, String comment) {
         this.start = start;
         this.end = end;
@@ -55,18 +75,38 @@ public class Monitor implements Serializable {
         destinations = buildDestinations(start, end);
     }
 
+    /**
+     * Get the start IP of the monitor.
+     *
+     * @return the start IP address
+     */
     public String getStart() {
         return start;
     }
 
+    /**
+     * Get the end IP of the monitor.
+     *
+     * @return the end IP address
+     */
     public String getEnd() {
         return end;
     }
 
+    /**
+     * Get the monitoring interval of the monitor.
+     *
+     * @return the interval in seconds
+     */
     public int getInterval() {
         return interval;
     }
 
+    /**
+     * Set the monitoring interval for all destinations of the monitor.
+     *
+     * @param interval the interval in seconds
+     */
     public void setInterval(int interval) {
         this.interval = interval;
 
@@ -75,6 +115,11 @@ public class Monitor implements Serializable {
         });
     }
 
+    /**
+     * Get the comment text for the monitor.
+     *
+     * @return the comment text
+     */
     public String getComment() {
         return comment;
     }
@@ -208,5 +253,4 @@ public class Monitor implements Serializable {
     public String toString() {
         return "Monitor{" + "start=" + start + ", end=" + end + ", interval=" + interval + ", comment=" + comment + ", service=" + service + '}';
     }
-
 }
