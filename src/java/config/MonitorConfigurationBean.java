@@ -86,7 +86,7 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
     private List<MonitorView> selectedMonitors;
 
     /**
-     * A list of running monitors
+     * A synchronized list of running monitors
      */
     private static final List<Monitor> RUNNING_MONITORS = Collections.synchronizedList(new ArrayList<>());
 
