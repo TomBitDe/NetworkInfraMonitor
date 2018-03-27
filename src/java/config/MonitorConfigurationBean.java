@@ -335,7 +335,7 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
     /**
      * Set the add button disabled.
      *
-     * @param addDisabled true if button needs to be diaabled, else false
+     * @param addDisabled true if button needs to be disabled, else false
      */
     public void setAddDisabled(boolean addDisabled) {
         this.addDisabled = addDisabled;
@@ -353,7 +353,7 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
     /**
      * Set the delete button disabled.
      *
-     * @param deleteDisabled true if button needs to be diaabled, else false
+     * @param deleteDisabled true if button needs to be disabled, else false
      */
     public void setDeleteDisabled(boolean deleteDisabled) {
         this.deleteDisabled = deleteDisabled;
@@ -371,7 +371,7 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
     /**
      * Set the start button disabled.
      *
-     * @param startDisabled true if button needs to be diaabled, else false
+     * @param startDisabled true if button needs to be disabled, else false
      */
     public void setStartDisabled(boolean startDisabled) {
         this.startDisabled = startDisabled;
@@ -389,7 +389,7 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
     /**
      * Set the stop button disabled.
      *
-     * @param stopDisabled true if button needs to be diaabled, else false
+     * @param stopDisabled true if button needs to be disabled, else false
      */
     public void setStopDisabled(boolean stopDisabled) {
         this.stopDisabled = stopDisabled;
@@ -407,7 +407,7 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
     /**
      * Set the results button disabled.
      *
-     * @param resultsDisabled true if button needs to be diaabled, else false
+     * @param resultsDisabled true if button needs to be disabled, else false
      */
     public void setResultsDisabled(boolean resultsDisabled) {
         this.resultsDisabled = resultsDisabled;
@@ -425,7 +425,7 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
     /**
      * Set the load button disabled.
      *
-     * @param loadDisabled true if button needs to be diaabled, else false
+     * @param loadDisabled true if button needs to be disabled, else false
      */
     public void setLoadDisabled(boolean loadDisabled) {
         this.loadDisabled = loadDisabled;
