@@ -40,6 +40,7 @@ public class Prober implements Runnable {
         this.probeList = new ArrayList<>();
 
         probeList.add(new EchoProbe(destination));
+        probeList.add(new TimeServerProbe(destination));
 
         // Do not use ping until it is more improved
         // probeList.add(new PingProbe(destination));
