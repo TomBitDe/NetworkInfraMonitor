@@ -62,8 +62,9 @@ public class TimeServerProbe implements Probe, Runnable {
             for (int i = 3; i >= 0; i--) {
                 time ^= (long) in.read() << i * 8;
             }
-            // Der Time Server gibt die Sekunden seit 1900 aus, Java erwartet Millisekunden seit 1970:
-            System.out.println(DATEFORMAT.format(new Date((time - SECONDS_1900_1970) * 1000)));
+            // The Time Server returns the seconds since 1900, Java expects milliseconds since 1970
+            // Calculate to get the correct format
+            LOG.debug(DATEFORMAT.format(new Date((time - SECONDS_1900_1970) * 1000)));
         }
         catch (IOException ex) {
             LOG.error(ex.getMessage());
@@ -74,17 +75,22 @@ public class TimeServerProbe implements Probe, Runnable {
                 try {
                     in.close();
                 }
-                catch (IOException ex) {/*ok*/
+                catch (IOException ex) {
+                    LOG.debug("Closing input stream failed, but that is ok...");
                 }
             }
             if (so != null) {
                 try {
                     so.close();
                 }
-                catch (IOException ex) {/*ok*/
+                catch (IOException ex) {
+                    LOG.debug("Closing socket failed, but that is ok...");
                 }
             }
         }
+
+        // Result is OK; set it for further display
+        destination.setProbeResult(true);
 
         LOG.debug("TimeServer <" + destination.getInetAddr().getHostAddress() + "> quality=" + destination.getQuality());
     }
