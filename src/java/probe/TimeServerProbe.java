@@ -52,6 +52,7 @@ public class TimeServerProbe implements Probe, Runnable {
         Socket so = null;
         InputStream in = null;
         long time = 0;
+        boolean result;
 
         destination.setLastProbe(LocalDateTime.now());
 
@@ -65,10 +66,11 @@ public class TimeServerProbe implements Probe, Runnable {
             // The Time Server returns the seconds since 1900, Java expects milliseconds since 1970
             // Calculate to get the correct format
             LOG.debug(DATEFORMAT.format(new Date((time - SECONDS_1900_1970) * 1000)));
+            result = true;
         }
         catch (IOException ex) {
             LOG.error(ex.getMessage());
-            destination.setProbeResult(false);
+            result = false;
         }
         finally {
             if (in != null) {
@@ -89,8 +91,8 @@ public class TimeServerProbe implements Probe, Runnable {
             }
         }
 
-        // Result is OK; set it for further display
-        destination.setProbeResult(true);
+        // Set the probe result; set it for further display
+        destination.setProbeResult(result);
 
         LOG.debug("TimeServer <" + destination.getInetAddr().getHostAddress() + "> quality=" + destination.getQuality());
     }

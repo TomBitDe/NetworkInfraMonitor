@@ -88,6 +88,9 @@ public class Prober implements Runnable {
                 destination.setProbe(probe.getClass().getSimpleName());
                 return;
             }
+            else {
+                destination.setProbe("");
+            }
         }
 
         // No probe was ok; clear the probe in destination
