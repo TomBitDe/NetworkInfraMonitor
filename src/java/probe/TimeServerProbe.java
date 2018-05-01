@@ -3,7 +3,7 @@ package probe;
 import destination.Destination;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -57,8 +57,10 @@ public class TimeServerProbe implements Probe, Runnable {
         destination.setLastProbe(LocalDateTime.now());
 
         try {
-            InetAddress inet = InetAddress.getByAddress(destination.getInetAddr().getAddress());
-            so = new Socket(inet, 37);
+            so = new Socket();
+            InetSocketAddress soaddr = new InetSocketAddress(destination.getInetAddr(), 37);
+            // Set the connect timeout; this is needed because the default is too long
+            so.connect(soaddr, 5000);
             in = so.getInputStream();
             for (int i = 3; i >= 0; i--) {
                 time ^= (long) in.read() << i * 8;
@@ -69,7 +71,7 @@ public class TimeServerProbe implements Probe, Runnable {
             result = true;
         }
         catch (IOException ex) {
-            LOG.error(ex.getMessage());
+            LOG.error(destination.getInetAddr().getHostAddress() + " " + ex.getMessage());
             result = false;
         }
         finally {
