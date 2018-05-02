@@ -31,6 +31,13 @@ public class NodeResultsDocument implements Serializable, Comparable<NodeResults
     private int quality = -1;
     private String probe = "";
 
+    /**
+     * Create a Node Results Document for display.
+     *
+     * @param monitorId the monitor id
+     * @param summary   a summary text
+     * @param interval  the interval to run the monitor
+     */
     public NodeResultsDocument(String monitorId, int summary, String interval) {
         this.monitorId = monitorId;
         this.summary = summary;
@@ -40,6 +47,15 @@ public class NodeResultsDocument implements Serializable, Comparable<NodeResults
         this.probe = "";
     }
 
+    /**
+     * Create a Node Results Document for display.
+     *
+     * @param inetAddr    the IP
+     * @param lastProbe   the last probe time
+     * @param probeResult the last probe result
+     * @param quality     the probe quality
+     * @param probe       the probe that was used on success
+     */
     public NodeResultsDocument(InetAddress inetAddr, LocalDateTime lastProbe, int probeResult, int quality, String probe) {
         this.summary = -1;
         this.inetAddr = inetAddr;
@@ -49,66 +65,146 @@ public class NodeResultsDocument implements Serializable, Comparable<NodeResults
         this.probe = probe;
     }
 
+    /**
+     * Get the monitors id.
+     *
+     * @return the monitors id
+     */
     public String getMonitorId() {
         return monitorId;
     }
 
+    /**
+     * Set the monitors id.
+     *
+     * @param monitorId the monitors id
+     */
     public void setMonitorId(String monitorId) {
         this.monitorId = monitorId;
     }
 
+    /**
+     * Get the monitors summary text.
+     *
+     * @return the summary text
+     */
     public int getSummary() {
         return summary;
     }
 
+    /**
+     * Set the monitors summary text.
+     *
+     * @param summary the text
+     */
     public void setSummary(int summary) {
         this.summary = summary;
     }
 
+    /**
+     * Get the monitors probe interval.
+     *
+     * @return the interval value
+     */
     public String getInterval() {
         return interval;
     }
 
+    /**
+     * Set the monitors probe interval.
+     *
+     * @param interval the interval value
+     */
     public void setInterval(String interval) {
         this.interval = interval;
     }
 
+    /**
+     * Get the IP the monitor is responsible for.
+     *
+     * @return the IP
+     */
     public InetAddress getInetAddr() {
         return inetAddr;
     }
 
+    /**
+     * Set the IP the monitor is responsible for.
+     *
+     * @param inetAddr the IP
+     */
     public void setInetAddr(InetAddress inetAddr) {
         this.inetAddr = inetAddr;
     }
 
+    /**
+     * Get the last probe time.
+     *
+     * @return the time value
+     */
     public LocalDateTime getLastProbe() {
         return lastProbe;
     }
 
+    /**
+     * Set the last probe time.
+     *
+     * @param lastProbe the time
+     */
     public void setLastProbe(LocalDateTime lastProbe) {
         this.lastProbe = lastProbe;
     }
 
+    /**
+     * Get the last probe result.
+     *
+     * @return the result value
+     */
     public int getProbeResult() {
         return probeResult;
     }
 
+    /**
+     * Set the last probe result.
+     *
+     * @param probeResult the result
+     */
     public void setProbeResult(int probeResult) {
         this.probeResult = probeResult;
     }
 
+    /**
+     * Get the probe quality.
+     *
+     * @return the quality value
+     */
     public int getQuality() {
         return quality;
     }
 
+    /**
+     * Set the probe quality.
+     *
+     * @param quality the quality value
+     */
     public void setQuality(int quality) {
         this.quality = quality;
     }
 
+    /**
+     * Get the probes name.
+     *
+     * @return the probes name on success
+     */
     public String getProbe() {
         return probe;
     }
 
+    /**
+     * Set the probes name.
+     *
+     * @param probe the probes name
+     */
     public void setProbe(String probe) {
         this.probe = probe;
     }

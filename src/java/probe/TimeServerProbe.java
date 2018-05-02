@@ -60,6 +60,7 @@ public class TimeServerProbe implements Probe, Runnable {
             so = new Socket();
             InetSocketAddress soaddr = new InetSocketAddress(destination.getInetAddr(), 37);
             // Set the connect timeout; this is needed because the default is too long
+            // Depends highly on destination.getInterval()
             so.connect(soaddr, 5000);
             in = so.getInputStream();
             for (int i = 3; i >= 0; i--) {

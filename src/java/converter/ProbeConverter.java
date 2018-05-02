@@ -13,6 +13,11 @@ import javax.faces.convert.FacesConverter;
 @FacesConverter("ProbeConverter")
 public class ProbeConverter implements Converter {
 
+    /**
+     * Get the probers name as Object without suffix 'Probe'.<br>
+     * <p>
+     * {@inheritDoc}
+     */
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String submittedValue) {
         if (submittedValue == null || submittedValue.isEmpty()) {
@@ -22,6 +27,11 @@ public class ProbeConverter implements Converter {
         return submittedValue.replace("Probe", "");
     }
 
+    /**
+     * Get the probers name as String without suffix 'Probe'.<br>
+     * <p>
+     * {@inheritDoc}
+     */
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object modelValue) {
         if (modelValue == null) {

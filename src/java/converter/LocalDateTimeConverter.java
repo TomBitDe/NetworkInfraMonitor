@@ -21,6 +21,11 @@ import javax.faces.convert.FacesConverter;
 @FacesConverter("LocalDateTimeConverter")
 public class LocalDateTimeConverter implements Converter {
 
+    /**
+     * Get the Local Date Time as String in the format given by modelValue.<br>
+     * <p>
+     * {@inheritDoc}
+     */
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object modelValue) {
         if (modelValue == null) {
@@ -35,6 +40,11 @@ public class LocalDateTimeConverter implements Converter {
         }
     }
 
+    /**
+     * Get the Local Date Time as Object.<br>
+     * <p>
+     * {@inheritDoc}
+     */
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String submittedValue) {
         if (submittedValue == null || submittedValue.isEmpty()) {

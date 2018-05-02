@@ -12,21 +12,36 @@ import org.junit.Test;
  */
 public class IpUtilsTest {
 
+    /**
+     * Test class constructor.
+     */
     public IpUtilsTest() {
     }
 
+    /**
+     * What to do before before creating the test class.
+     */
     @BeforeClass
     public static void setUpClass() {
     }
 
+    /**
+     * What to do after finalizing the test class.
+     */
     @AfterClass
     public static void tearDownClass() {
     }
 
+    /**
+     * What to do before testing.
+     */
     @Before
     public void setUp() {
     }
 
+    /**
+     * What to do after testing.
+     */
     @After
     public void tearDown() {
     }

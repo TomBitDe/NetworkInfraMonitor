@@ -14,23 +14,43 @@ import org.junit.Test;
  */
 public class MonitorViewTest {
 
+    /**
+     * Test class constructor.
+     */
     public MonitorViewTest() {
+        System.out.println("Constructor call...");
     }
 
+    /**
+     * What to do before before creating the test class.
+     */
     @BeforeClass
     public static void setUpClass() {
+        System.out.println("Setup class call...");
     }
 
+    /**
+     * What to do after finalizing the test class.
+     */
     @AfterClass
     public static void tearDownClass() {
+        System.out.println("Teardown class call...");
     }
 
+    /**
+     * What to do before testing.
+     */
     @Before
     public void setUp() {
+        System.out.println("Setup call...");
     }
 
+    /**
+     * What to do after testing.
+     */
     @After
     public void tearDown() {
+        System.out.println("Teardown call...");
     }
 
     /**
@@ -38,7 +58,7 @@ public class MonitorViewTest {
      */
     @Test
     public void testEquals() {
-        System.out.println("equals");
+        System.out.println("equals test...");
         Object obj = null;
         MonitorView instance = new MonitorView("10.10.10.21", "10.10.10.30", "30", "Test");
         Assert.assertEquals(true, instance.equals(new MonitorView("10.10.10.21", "10.10.10.30", "30", "Test")));
@@ -52,7 +72,7 @@ public class MonitorViewTest {
      */
     @Test
     public void testIsValidAgainst() {
-        System.out.println("isValidAgainst");
+        System.out.println("isValidAgainst test...");
         List<MonitorView> monitorList = new ArrayList<>();
         monitorList.add(new MonitorView("10.10.10.1", "10.10.10.22", "30", "Test"));
         monitorList.add(new MonitorView("10.10.10.47", "10.10.10.47", "30", "Test"));
