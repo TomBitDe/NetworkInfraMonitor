@@ -72,7 +72,7 @@ public class TimeServerProbe implements Probe, Runnable {
             result = true;
         }
         catch (IOException ex) {
-            LOG.error(destination.getInetAddr().getHostAddress() + " " + ex.getMessage());
+            LOG.info(destination.getInetAddr().getHostAddress() + " " + ex.getMessage());
             result = false;
         }
         finally {
