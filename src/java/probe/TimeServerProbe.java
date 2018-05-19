@@ -12,7 +12,9 @@ import java.util.Date;
 import org.apache.log4j.Logger;
 
 /**
- * A time server probe.
+ * A time server probe.<br>
+ * <br>
+ * Contact the time server to find out if this destination is alive.
  */
 public class TimeServerProbe implements Probe, Runnable {
     /**

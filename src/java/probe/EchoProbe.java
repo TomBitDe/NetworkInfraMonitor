@@ -8,7 +8,9 @@ import java.time.temporal.ChronoUnit;
 import org.apache.log4j.Logger;
 
 /**
- * An echo probe.
+ * An echo probe.<br>
+ * <br>
+ * Contact the echo port to find out if this destination is alive.
  */
 public class EchoProbe implements Probe, Runnable {
     /**

@@ -11,7 +11,9 @@ import java.util.Locale;
 import org.apache.log4j.Logger;
 
 /**
- * A ping probe.
+ * A ping probe.<br>
+ * <br>
+ * Contact the ping port to find out if this destination is alive.
  */
 public class PingProbe implements Probe, Runnable {
     /**
