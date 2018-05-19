@@ -39,6 +39,7 @@ public class Prober implements Runnable {
 
         this.probeList = new ArrayList<>();
 
+        probeList.add(new ServerPortProbe(destination));
         probeList.add(new EchoProbe(destination));
         probeList.add(new TimeServerProbe(destination));
 
@@ -87,9 +88,6 @@ public class Prober implements Runnable {
                 // A single true probe is enough; set the probe in destination
                 destination.setProbe(probe.getClass().getSimpleName());
                 return;
-            }
-            else {
-                destination.setProbe("");
             }
         }
 
