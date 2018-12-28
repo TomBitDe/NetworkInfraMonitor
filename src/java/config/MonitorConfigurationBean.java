@@ -39,6 +39,10 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
      */
     private static final Logger LOG = Logger.getLogger(MonitorConfigurationBean.class);
     /**
+     * The path to the default monitor configuration.
+     */
+    private static final String DEFAULT_MONITORS_CFG = "monitors.properties";
+    /**
      * The path to put monitor configuration.
      */
     private static final String MONITORS_CFG = "WEB-INF/monitors.properties";
@@ -129,7 +133,13 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
         Properties props = new Properties();
         FileInputStream fis = null;
 
-        File cfgPropertiesFile = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath(MONITORS_CFG));
+        File configDir = new File(System.getProperty("catalina.base"), "conf");
+        File cfgPropertiesFile = new File(configDir, DEFAULT_MONITORS_CFG);
+
+        if (!cfgPropertiesFile.exists()) {
+            LOG.warn("DEFAULT monitor configuration not found [" + cfgPropertiesFile.getPath() + "]");
+            cfgPropertiesFile = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath(MONITORS_CFG));
+        }
         LOG.info(cfgPropertiesFile.getPath());
 
         try {
@@ -184,8 +194,10 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
 
         OutputStream oStream = null;
 
+        File configDir = new File(System.getProperty("catalina.base"), "conf");
+        File cfgPropertiesFile = new File(configDir, DEFAULT_MONITORS_CFG);
+
         try {
-            File cfgPropertiesFile = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath(MONITORS_CFG));
             LOG.info(cfgPropertiesFile.getPath());
 
             oStream = new FileOutputStream(cfgPropertiesFile);
@@ -194,15 +206,29 @@ public class MonitorConfigurationBean implements Serializable, ServletContextLis
             oStream.close();
         }
         catch (IOException ioex) {
-            if (oStream != null) {
-                try {
-                    oStream.close();
-                }
-                catch (IOException ex) {
-                    LOG.error(ex.getMessage());
-                }
+            LOG.warn("DEFAULT monitor configuration file [" + ioex.getLocalizedMessage() + "]");
+
+            cfgPropertiesFile = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath(MONITORS_CFG));
+
+            try {
+                LOG.info(cfgPropertiesFile.getPath());
+
+                oStream = new FileOutputStream(cfgPropertiesFile);
+                props.store(oStream, "");
+
+                oStream.close();
             }
-            LOG.info(ioex.getMessage());
+            catch (IOException ex) {
+                if (oStream != null) {
+                    try {
+                        oStream.close();
+                    }
+                    catch (IOException inex) {
+                        LOG.error(inex.getMessage());
+                    }
+                }
+                LOG.warn(ex.getLocalizedMessage());
+            }
         }
     }
 
