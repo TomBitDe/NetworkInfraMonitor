@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
  */
 public class Prober implements Runnable {
     /**
-     * A looger.
+     * A logger.
      */
     private static final Logger LOG = Logger.getLogger(Prober.class);
 
